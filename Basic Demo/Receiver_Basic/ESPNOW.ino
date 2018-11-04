@@ -61,12 +61,12 @@ void start_ESP_NOW_AccessPoint() {
      To be safe, make the password long and random.
 
   */
-  bool result = WiFi.softAP(full_esp_now_ssid, ESP_NOW_PASSWORD, WiFi.channel());
+  bool result = WiFi.softAP(full_esp_now_ssid, ESP_NOW_PASSWORD);
   if (!result) {
     Serial.println("AP Config failed.");
     ESP.restart();
   } else {
-    Serial.println("AP Config Success. Broadcasting with AP: " + String(full_esp_now_ssid));
+    Serial.println("AP Config Success. Broadcasting with AP: " + String(full_esp_now_ssid) + " " + String(WiFi.channel()));
     setupMQTT();
   }
 

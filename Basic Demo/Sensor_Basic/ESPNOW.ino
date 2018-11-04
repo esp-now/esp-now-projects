@@ -1,5 +1,9 @@
 void InitESPNow() {
-  WiFi.mode(WIFI_STA);
+
+
+ WiFi.mode(WIFI_STA); 
+ 
+  Serial.print("WiFi Channel "); Serial.println(WiFi.channel());
   if (esp_now_init() == ESP_OK) {
     Serial.println("ESPNow Init Success");
     esp_now_register_send_cb(OnDataSent);
@@ -62,6 +66,7 @@ void ScanForSlave() {
     Serial.print("SSID "); Serial.print(WiFi.SSID(i));
     if (WiFi.SSID(i).indexOf(ESP_NOW_SSID) == 0)
     {
+
       Serial.print(" match found.");
       String BSSIDstr = WiFi.BSSIDstr(i);
 
@@ -95,7 +100,7 @@ void ScanForSlave() {
         }
       }
     }
-    Serial.println("");
+    Serial.println(" " + String(WiFi.channel(i)));
   }
 
 }

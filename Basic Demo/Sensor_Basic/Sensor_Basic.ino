@@ -52,13 +52,20 @@ void setup() {
   pinMode(GPIO_NUM_33, INPUT_PULLUP); //Pin 9 on the WROOM-32
   InitESPNow() ; //ESP-NOW Tab
   //Set WiFi chip to max power
+  Serial.println(millis());
   esp_wifi_set_max_tx_power(78);
+   Serial.println(millis());
   if (bootCount == 0)
   {
     ScanForSlave(); //ESP-NOW Tab Remember Slave = Receiver
     putMeToSleep(); //Deep Sleep Tab
+ 
   } else {
+  //  
+    
     esp_wifi_set_channel(slave.channel, WIFI_SECOND_CHAN_NONE);
+   
+    Serial.print("WiFi Channel "); Serial.println(WiFi.channel());
     manageSlave(); //ESP-NOW Tab
     print_wakeup_reason(); //Deep Sleep Tab
     if (wakeup_reason == 1)
